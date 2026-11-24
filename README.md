@@ -10,6 +10,20 @@ Everything you'd normally change lives in the `WEDDING` settings block near the 
 
 The link preview text shown in WhatsApp/iMessage is in the `<meta property="og:…">` tags at the top of the file. Those have to be edited by hand.
 
+### Link preview image
+
+`preview.jpg` (1200×630) is the picture WhatsApp/iMessage show when the link is shared. It's rendered from [`tools/preview-card.html`](tools/preview-card.html). If the names or dates change, edit that file, then re-render it with Chrome while the local preview server below is running:
+
+```bash
+"/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" --headless=new --hide-scrollbars --window-size=1200,630 --force-device-scale-factor=2 --virtual-time-budget=8000 --screenshot=card@2x.png http://127.0.0.1:8642/tools/preview-card.html
+```
+
+```bash
+sips -z 630 1200 -s format jpeg -s formatOptions 82 card@2x.png --out preview.jpg && rm card@2x.png
+```
+
+WhatsApp caches previews, so a chat where the link was already pasted keeps showing the old preview.
+
 ## Preview locally
 
 ```bash
