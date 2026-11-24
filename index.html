@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Mehdi &amp; Sughra · Wedding Invitation</title>
-<meta name="description" content="With the blessings of Allah, you are warmly invited to celebrate the Mehendi, Nikah and Valima of Dr Mir Mehdi Hussain &amp; Sughra Fatima.">
+<meta name="description" content="With the blessings of Allah, you are warmly invited to celebrate the Mehendi, Nikah and Valima of Dr. Mir Mehdi Hussain (Ali) &amp; Sughra Fatima.">
 <meta name="theme-color" content="#0A3124">
 
 <!-- Link preview for WhatsApp / iMessage. These must be edited by hand (link previews don't run JavaScript). -->
@@ -66,7 +66,7 @@ a{color:inherit}
 button{font:inherit;color:inherit}
 p{margin:0}
 h1,h2,h3,h4{margin:0;font-weight:500;text-wrap:balance}
-.names .parent,.lead,.note,.sub,.hosts,.parentage,.dua-en,.closing-msg,.ev-addr,.ev-venue,.bismillah-en,.script-lg,.cd-note,.cite,.families{text-wrap:balance}
+.names .parent,.lead,.note,.sub,.hosts,.parentage,.dua-en,.closing-msg,.ev-addr,.ev-venue,.bismillah-en,.script-lg,.cd-note,.cite{text-wrap:balance}
 .defs{position:absolute;width:0;height:0;overflow:hidden}
 .nw{white-space:nowrap}
 @keyframes spin{to{transform:rotate(360deg)}}
@@ -146,7 +146,8 @@ html:not(.js) #intro{display:none}
 @keyframes breathe{0%,100%{opacity:.45}50%{opacity:1}}
 
 /* ───────────── Hero: a bottle-green night of lights ───────────── */
-.hero{position:relative;min-height:100vh;min-height:100svh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:clamp(100px,13vh,150px) 16px clamp(84px,11vh,120px);overflow:hidden;isolation:isolate;text-align:center;color:var(--gold-3);
+/* HERO LIFT: moves the crest and hero text up (fairy lights and lanterns stay where they are). Set --hero-lift to 0px to undo. */
+.hero{--hero-lift:36px;position:relative;min-height:100vh;min-height:100svh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:calc(clamp(100px,13vh,150px) - var(--hero-lift)) 16px calc(clamp(84px,11vh,120px) + var(--hero-lift));overflow:hidden;isolation:isolate;text-align:center;color:var(--gold-3);
   background:radial-gradient(85% 60% at 50% 40%,#1B5D46 0%,#114634 36%,#0B3427 68%,#06211A 100%)}
 .hero::after{content:"";position:absolute;left:0;right:0;bottom:0;height:2px;z-index:7;background:linear-gradient(90deg,transparent,var(--gold) 30%,var(--gold-3) 50%,var(--gold) 70%,transparent)}
 .velvet{position:absolute;inset:0;z-index:-4;pointer-events:none;opacity:.7;background:var(--lattice-dark);background-size:56px 56px;background-position:center;-webkit-mask-image:radial-gradient(130% 95% at 50% 45%,#000 35%,rgba(0,0,0,.3) 80%);mask-image:radial-gradient(130% 95% at 50% 45%,#000 35%,rgba(0,0,0,.3) 80%)}
@@ -177,6 +178,7 @@ html:not(.js) #intro{display:none}
 }
 
 .hero-inner{position:relative;z-index:3;width:min(100%,640px);transform:translate3d(calc(var(--px,0) * -10px),calc(var(--py,0) * -8px),0);transition:transform 1.2s var(--ease)}
+@media (min-width:900px){.hero-inner{width:min(100%,860px)}}
 .crest{position:relative;width:clamp(150px,44vw,218px);aspect-ratio:1;margin:0 auto 14px}
 .js .crest{opacity:0;transform:scale(.6) rotate(-40deg)}
 .js.revealed .crest{animation:crestIn 2s var(--ease) .55s forwards}
@@ -237,6 +239,14 @@ html:not(.js) #intro{display:none}
 .parentage{font-style:italic;color:var(--ink-2);font-size:1.06rem;margin-top:6px}
 .note{margin:28px auto 0;max-width:28em;font-style:italic;color:var(--ink-2)}
 .invite-card .ornament{margin:30px auto 0;width:min(180px,60%)}
+.blessings-title{font-style:italic;color:var(--gold-deep);font-size:1.12rem;margin:0}
+.blessings-names{list-style:none;padding:0;margin:8px 0 0;color:var(--em-800);font-weight:500;font-size:clamp(1.06rem,4.2vw,1.2rem);line-height:1.5}
+.blessings-names li{text-wrap:balance}
+.blessings-names li+li{margin-top:4px}
+.card-divider{display:flex;align-items:center;justify-content:center;gap:10px;margin:24px auto 26px;width:min(210px,70%);color:var(--gold)}
+.card-divider i{flex:1;height:1px;background:linear-gradient(90deg,rgba(198,161,91,0),rgba(198,161,91,.75))}
+.card-divider i:last-child{background:linear-gradient(-90deg,rgba(198,161,91,0),rgba(198,161,91,.75))}
+.card-divider svg{width:44px;height:19px;flex:none}
 
 /* Bottle-green bands */
 .band{position:relative;padding:clamp(70px,11vw,110px) 16px;text-align:center;color:var(--gold-3);background:var(--lattice-dark),radial-gradient(120% 120% at 50% 0%,#1B5D46 0%,#114634 46%,#0A3124 100%);background-size:60px 60px,100% 100%;background-position:center}
@@ -367,7 +377,6 @@ textarea.input:focus{box-shadow:0 0 0 1px var(--em-700)}
 /* Closing */
 .closing{padding-bottom:calc(46px + env(safe-area-inset-bottom,0px))}
 .closing-msg{max-width:30em;margin:14px auto 0;font-size:1.22rem;color:rgba(245,231,193,.94)}
-.families{font-family:var(--caps);letter-spacing:.14em;text-transform:uppercase;color:var(--gold-3);font-size:clamp(.9rem,3.6vw,1.1rem);margin:26px auto 0;line-height:1.7;max-width:34em}
 .compl{margin-top:34px}
 .compl ul{list-style:none;padding:0;margin:10px 0 0;color:rgba(245,231,193,.86);font-style:italic;font-size:1.1rem;line-height:1.7}
 .hashtag{font-family:var(--caps);letter-spacing:.2em;color:var(--gold-2);margin-top:34px}
@@ -497,6 +506,11 @@ textarea.input:focus{box-shadow:0 0 0 1px var(--em-700)}
         <svg class="corner tr" viewBox="0 0 46 46" aria-hidden="true"><use href="#cornerArt"/></svg>
         <svg class="corner bl" viewBox="0 0 46 46" aria-hidden="true"><use href="#cornerArt"/></svg>
         <svg class="corner br" viewBox="0 0 46 46" aria-hidden="true"><use href="#cornerArt"/></svg>
+        <div class="blessings" id="blessings">
+          <p class="blessings-title">With the love and blessings of grandparents</p>
+          <ul class="blessings-names" id="grandparents"></ul>
+          <div class="card-divider" aria-hidden="true"><i></i><svg viewBox="-14 -6 28 12"><path d="M-12 0L-8.5-2.2L-5 0L-8.5 2.2ZM5 0L8.5-2.2L12 0L8.5 2.2Z" fill="currentColor" opacity=".55"/><path d="M0-5L1.4-1.4L5 0L1.4 1.4L0 5L-1.4 1.4L-5 0L-1.4-1.4Z" fill="currentColor"/></svg><i></i></div>
+        </div>
         <p class="hosts" data-t="groom.parents"></p>
         <p class="lead">request the honour of your presence, with your family, at the wedding celebrations of their beloved son</p>
         <h2 class="couple" data-t="groom.name"></h2>
@@ -598,9 +612,8 @@ textarea.input:focus{box-shadow:0 0 0 1px var(--em-700)}
 
   <!-- ═════════════ CLOSING ═════════════ -->
   <footer class="band closing" id="closing">
-    <p class="script-lg reveal">With prayers &amp; duas</p>
+    <p class="script-lg reveal">We look forward to your presence</p>
     <p class="closing-msg reveal">Your presence and duas are the most precious gift we could ask for. We look forward to celebrating with you.</p>
-    <p class="families reveal" data-t="closing.families"></p>
     <div class="compl reveal" id="complBlock">
       <p class="eyebrow">With best compliments from</p>
       <ul id="complList"></ul>
@@ -640,10 +653,15 @@ textarea.input:focus{box-shadow:0 0 0 1px var(--em-700)}
    ════════════════════════════════════════════════════════════════════ */
 const WEDDING = {
   groom: {
-    name: "Dr Mir Mehdi Hussain",
+    name: "Dr. Mir Mehdi Hussain (Ali)",
     short: "Mehdi",
     relation: "Son of",
-    parents: "Dr Mir Jafar Hussain & Mrs. Sabika Hussain",
+    parents: "Dr. Mir Jafar Hussain & Mrs. Sabika Hussain",
+    // Shown at the top of the invite card. Set to [] to hide.
+    grandparents: [
+      "Late Mir Murtuza Hussain Tabrezi and Siddiqa Begum",
+      "Mir Aulad Hussain and Amatul Azra",
+    ],
   },
   bride: {
     name: "Sughra Fatima",
@@ -653,7 +671,7 @@ const WEDDING = {
   },
   city: "Dubai",
   utcOffset: "+04:00",            // venue time zone offset (UAE = +04:00)
-  hashtag: "#MehdiWedsSughra",
+  hashtag: "#HappAliwithSughra",
 
   // Shown in order on the "Wedding Journey" timeline.
   events: [
@@ -661,8 +679,8 @@ const WEDDING = {
       id: "mehendi",
       label: "Mehendi",
       title: "Mehendi",
-      date: "2027-03-12", start: "19:30", end: "23:30",
-      timeText: "7:30 PM onwards",
+      date: "2027-03-12", start: "20:00", end: "23:30",
+      timeText: "8:00 PM onwards",
       venue: "Radisson Blu Hotel, Dubai Deira Creek",
       address: "Baniyas Road, Deira, Dubai",
       icon: "henna",
@@ -695,15 +713,15 @@ const WEDDING = {
 
   rsvp: {
     deadline: "1 March 2027",
-    whatsapp: "+1 (716) 239-2281",   // RSVPs go to this WhatsApp number (include the country code)
+    whatsapp: "+1 (469) 971-0307",   // RSVPs go to this WhatsApp number (include the country code)
   },
 
   closing: {
-    families: "Dr Mir Jafar Hussain & Mrs. Sabika Hussain · Mirza Jarrar Ali & Mrs. Anjum Fatima",
-    compliments: [
-      "Dada, Dadi, Nana & Nani",
-      "Uncles, aunts & cousins of both families",
-      "Friends & well-wishers",
+    compliments: [               // "With best compliments from"
+      "Sarah and Zain",
+      "Samar and Husain",
+      "Akbar",
+      "Kabir and Seher",
     ],
   },
 
@@ -747,16 +765,22 @@ const WEDDING = {
     if (e <= s) e = new Date(e.getTime() + 864e5);
     return e;
   };
+  /* Hijri dates. Some phones have the Islamic calendar but not its English month names, and fall back to
+     Gregorian names (Shawwal is month 10, so it showed as "October"). So ask for numbers only and name the
+     month here. Phones with no Islamic calendar at all hide the Hijri line rather than risk a wrong date. */
+  const HIJRI_MONTHS = ["Muharram", "Safar", "Rabi al-Awwal", "Rabi al-Thani", "Jumada al-Ula", "Jumada al-Akhirah", "Rajab", "Shaban", "Ramadan", "Shawwal", "Dhul Qadah", "Dhul Hijjah"];
   let hijriFmt = null;
   try {
-    const f = new Intl.DateTimeFormat("en-u-ca-islamic-umalqura", { timeZone: "UTC", day: "numeric", month: "long", year: "numeric" });
+    const f = new Intl.DateTimeFormat("en-u-ca-islamic-umalqura-nu-latn", { timeZone: "UTC", day: "numeric", month: "numeric", year: "numeric" });
     if (f.resolvedOptions().calendar.startsWith("islamic")) hijriFmt = f;
-  } catch (e) { /* no Hijri support: just hide it */ }
+  } catch (e) { /* no Intl Islamic calendar: the Hijri line stays hidden */ }
   const hijriParts = s => {
     if (!hijriFmt) return null;
     const parts = hijriFmt.formatToParts(noonUTC(s));
-    const g = t => (parts.find(p => p.type === t) || {}).value || "";
-    return { d: g("day"), m: g("month"), y: g("year") };
+    const g = t => parseInt((parts.find(p => p.type === t) || {}).value, 10);
+    const d = g("day"), m = g("month"), y = g("year");
+    if (!(m >= 1 && m <= 12 && d >= 1 && d <= 30 && y > 1400 && y < 1600)) return null; // not a real Hijri date: hide it
+    return { d: String(d), m: HIJRI_MONTHS[m - 1], y: String(y) };
   };
   const hijriOf = ev => {
     if (ev.hijri) return ev.hijri;
@@ -849,13 +873,27 @@ const WEDDING = {
       buildVines();
     }
 
-    /* Gold vines that grow up from the bottom corners and bloom. */
+    /* Each line of hero text as a box (hero coordinates, without the rise/parallax transforms), padded. */
+    function textBoxes() {
+      const hr = hero.getBoundingClientRect(), out = [];
+      $$(".kicker, .names .n, .names .parent, .names .amp, .hero-date, .hero-hijri, .hero-city", hero).forEach(el => {
+        let ox = 0, oy = 0, e = el;
+        while (e && e !== hero) { ox += e.offsetLeft; oy += e.offsetTop; e = e.offsetParent; }
+        if (e !== hero) return;
+        const br = el.getBoundingClientRect(), dx = br.left - hr.left - ox, dy = br.top - hr.top - oy;
+        const rg = document.createRange(); rg.selectNodeContents(el);
+        for (const r of rg.getClientRects()) if (r.width > 0) out.push({ l: r.left - hr.left - dx - 16, r: r.right - hr.left - dx + 16, t: r.top - hr.top - dy - 14, b: r.bottom - hr.top - dy + 14 });
+      });
+      return out;
+    }
+    /* Gold vines that grow up from the bottom corners and bloom, stopping short of any text. */
     function buildVines() {
       branches.length = 0;
+      const boxes = textBoxes();
       const S = small ? .85 : 1.2, reach = small ? .4 : .58;
       const zone = w * (small ? .2 : .2), top = h * (1 - reach - .04);
       for (const side of [-1, 1]) {
-        const base = { x: side < 0 ? -4 : w + 4, y: h + 6, side, zone, top };
+        const base = { x: side < 0 ? -4 : w + 4, y: h + 6, side, zone, top, boxes };
         grow(base, -Math.PI / 2 - side * .26, h * reach, 3, 0, side, S, base);
       }
     }
@@ -863,7 +901,8 @@ const WEDDING = {
       const step = 5, n = Math.max(6, Math.round(len / step)), pts = [[p.x, p.y]];
       let a = ang, x = p.x, y = p.y;
       const curl = depth === 3 ? side * .003 : .014 * (Math.random() < .5 ? 1 : -1), wob = rnd(0, 6.3), wf = rnd(.08, .16);
-      const inZone = (x, y) => (side < 0 ? x < root.zone : x > w - root.zone) && y > root.top && x > -30 && x < w + 30;
+      const inZone = (x, y) => (side < 0 ? x < root.zone : x > w - root.zone) && y > root.top && x > -30 && x < w + 30
+        && !root.boxes.some(q => x > q.l && x < q.r && y > q.t && y < q.b);
       for (let i = 1; i <= n; i++) {
         a += curl + Math.sin(i * wf + wob) * .03;
         const nx = x + Math.cos(a) * step, ny = y + Math.sin(a) * step;
@@ -1049,7 +1088,7 @@ const WEDDING = {
     }
     return {
       start,
-      bloom() { growT = clock + .5; nextFw = 1.6; },
+      bloom() { buildVines(); growT = clock + .5; nextFw = 1.6; },
     };
   })();
 
@@ -1222,6 +1261,12 @@ const WEDDING = {
     toast("Opening WhatsApp with your reply. Tap Send there to confirm.", 4500);
   });
   setCount(1);
+
+  /* ---------- grandparents on the invite card ---------- */
+  const gps = W.groom.grandparents || [];
+  // Each couple wraps only at " and ", never mid-name.
+  if (gps.length) $("#grandparents").innerHTML = gps.map(g => `<li>${esc(g).split(" and ").map(s => `<span class="nw">${s}</span>`).join(" and ")}</li>`).join("");
+  else $("#blessings").remove();
 
   /* ---------- closing ---------- */
   const compl = (W.closing && W.closing.compliments) || [];
