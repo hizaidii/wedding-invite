@@ -146,8 +146,9 @@ html:not(.js) #intro{display:none}
 @keyframes breathe{0%,100%{opacity:.45}50%{opacity:1}}
 
 /* ───────────── Hero: a bottle-green night of lights ───────────── */
-/* HERO LIFT: moves the crest and hero text up (fairy lights and lanterns stay where they are). Set --hero-lift to 0px to undo. */
-.hero{--hero-lift:36px;position:relative;min-height:100vh;min-height:100svh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:calc(clamp(100px,13vh,150px) - var(--hero-lift)) 16px calc(clamp(84px,11vh,120px) + var(--hero-lift));overflow:hidden;isolation:isolate;text-align:center;color:var(--gold-3);
+/* HERO LIFT: --hero-lift moves the crest and hero text up; --lights-lift moves just the fairy lights up
+   (lanterns stay put). Set either to 0px to undo it. */
+.hero{--hero-lift:16px;--lights-lift:8px;position:relative;min-height:100vh;min-height:100svh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:calc(clamp(100px,13vh,150px) - var(--hero-lift)) 16px calc(clamp(84px,11vh,120px) + var(--hero-lift));overflow:hidden;isolation:isolate;text-align:center;color:var(--gold-3);
   background:radial-gradient(85% 60% at 50% 40%,#1B5D46 0%,#114634 36%,#0B3427 68%,#06211A 100%)}
 .hero::after{content:"";position:absolute;left:0;right:0;bottom:0;height:2px;z-index:7;background:linear-gradient(90deg,transparent,var(--gold) 30%,var(--gold-3) 50%,var(--gold) 70%,transparent)}
 .velvet{position:absolute;inset:0;z-index:-4;pointer-events:none;opacity:.7;background:var(--lattice-dark);background-size:56px 56px;background-position:center;-webkit-mask-image:radial-gradient(130% 95% at 50% 45%,#000 35%,rgba(0,0,0,.3) 80%);mask-image:radial-gradient(130% 95% at 50% 45%,#000 35%,rgba(0,0,0,.3) 80%)}
@@ -864,9 +865,10 @@ const WEDDING = {
       const defs = small
         ? [[-10, -6, .64, 16, 52], [.36, 22, 1.03, -8, 56]]
         : [[-20, -8, .44, 20, 70], [.3, 8, .72, 4, 56], [.58, 22, 1.02, -10, 74]];
+      const lift = parseFloat(getComputedStyle(hero).getPropertyValue("--lights-lift")) || 0; // see HERO LIFT in the CSS
       for (const [a, ya, b, yb, sag] of defs) {
         const x0 = a < 0 ? a : a * w, x1 = b * w, n = Math.round((x1 - x0) / (small ? 19 : 22));
-        strings.push({ x0, y0: ya, x1, y1: yb, sag, ph: rnd(0, 6.3), bulbs: Array.from({ length: n }, () => ({ ph: rnd(0, 6.3), sp: rnd(1.2, 3), c: Math.random() < .82 ? "warm" : (Math.random() < .5 ? "blush" : "mint") })) });
+        strings.push({ x0, y0: ya - lift, x1, y1: yb - lift, sag, ph: rnd(0, 6.3), bulbs: Array.from({ length: n }, () => ({ ph: rnd(0, 6.3), sp: rnd(1.2, 3), c: Math.random() < .82 ? "warm" : (Math.random() < .5 ? "blush" : "mint") })) });
       }
       for (let i = 0; i < (small ? 9 : 18); i++) petals.push(newPetal(true));
       for (let i = 0; i < (small ? 9 : 16); i++) twinkles.push({ x: rnd(0, w), y: rnd(0, h * .9), s: rnd(3, 6.5), ph: rnd(0, 6.3), sp: rnd(.6, 1.4), up: true });
