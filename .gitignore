@@ -1,0 +1,10 @@
+# Allowlist: ignore everything, then un-ignore only the files the site needs.
+# Keeps local-only files out of the repo: the saved reference site, the original
+# .wav/.mp3 downloads, editor/agent settings (.claude/), .env files and any credentials.
+*
+
+!.gitignore
+!.nojekyll
+!README.md
+!index.html
+!music.mp3
