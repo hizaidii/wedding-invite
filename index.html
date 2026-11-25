@@ -74,8 +74,10 @@ h1,h2,h3,h4{margin:0;font-weight:500;text-wrap:balance}
 
 /* ───────────── Intro: palace doors ───────────── */
 html:not(.js) #intro{display:none}
-#intro{position:fixed;inset:0;z-index:100;perspective:2200px;cursor:pointer;-webkit-tap-highlight-color:transparent;--seal:clamp(128px,36vw,168px);transition:visibility 0s linear 2.6s}
-#intro.open{visibility:hidden;pointer-events:none}
+#intro{position:fixed;inset:0;z-index:100;perspective:2200px;cursor:pointer;-webkit-tap-highlight-color:transparent;--seal:clamp(128px,36vw,168px);transition:opacity .4s ease 1.05s,visibility 0s linear 1.45s}
+/* The doors pass side-on (90°) about 1.3s into their swing; fade the cover out from ~70° so their gilded edges
+   never show as gold lines at the screen sides. */
+#intro.open{visibility:hidden;opacity:0;pointer-events:none}
 .door{position:absolute;top:0;height:100%;width:50%;--thick:6px;transform-style:preserve-3d;transition:transform 2.1s cubic-bezier(.6,.02,.18,1);will-change:transform}
 .door-l{left:0;transform-origin:0 50%}
 .door-r{left:50%;transform-origin:100% 50%}
