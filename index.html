@@ -134,7 +134,7 @@ html:not(.js) #intro{display:none}
 .intro-overlay{position:absolute;inset:0;display:grid;grid-template-rows:1fr var(--seal) 1fr;justify-items:center;text-align:center;padding:0 24px;pointer-events:none;transition:opacity .45s ease}
 #intro.cracking .intro-overlay{opacity:0}
 .intro-bottom{grid-row:3;align-self:start;padding-top:clamp(22px,4vh,40px)}
-.intro-tap{font-family:var(--caps);font-size:.72rem;letter-spacing:.3em;text-transform:uppercase;color:var(--em-700);animation:breathe 2.4s ease-in-out infinite}
+.intro-tap{font-family:var(--caps);font-size:.72rem;letter-spacing:.3em;text-transform:uppercase;color:#B0222C;animation:breathe 2.4s ease-in-out infinite}
 .seal-btn{grid-row:2;align-self:center;width:var(--seal);height:var(--seal);border-radius:50%;border:0;background:none;padding:0;cursor:pointer;pointer-events:auto;animation:ring 2.4s ease-out infinite}
 .seal-btn:focus-visible{outline:2px solid var(--em-700);outline-offset:6px}
 .seal-btn svg{display:block;width:100%;height:100%;pointer-events:none;filter:drop-shadow(0 7px 10px rgba(30,20,5,.38))}
@@ -194,23 +194,28 @@ html:not(.js) #intro{display:none}
 .crest-mono{font-family:var(--script);font-size:29px}
 .crest-amp{font-family:var(--script);font-size:19px}
 
-.hero .kicker{font-family:var(--caps);font-size:.66rem;letter-spacing:.3em;white-space:nowrap;text-transform:uppercase;color:var(--gold-2)}
+.hero .kicker{font-family:var(--caps);font-size:calc(.66rem + 2px);letter-spacing:.3em;white-space:nowrap;text-transform:uppercase;color:var(--gold-2)}
 .names{margin:.55em 0 0;font-size:clamp(2rem,8.6vw,3.5rem);line-height:1.06;font-weight:600;letter-spacing:.005em;filter:drop-shadow(0 0 16px rgba(233,196,120,.28))}
 .names .n{display:block}
 .sheen{display:inline-block;padding:0 .05em .1em;background:linear-gradient(105deg,rgba(255,250,230,0) 42%,rgba(255,250,232,.95) 50%,rgba(255,250,230,0) 58%),linear-gradient(100deg,#C29B50 0%,#F3DFA6 30%,#CFAA5E 52%,#F7E9C3 74%,#B8914A 100%);background-size:300% 100%,100% 100%;background-position:100% 0,0 0;background-repeat:no-repeat;-webkit-background-clip:text;background-clip:text;color:transparent;animation:sheen 7s ease-in-out 3s infinite}
 .sheen.later{animation-delay:3.6s}
 @keyframes sheen{0%{background-position:100% 0,0 0}30%,100%{background-position:0% 0,0 0}}
-.names .parent{display:block;font-size:clamp(.88rem,3.4vw,1.06rem);font-style:italic;font-weight:500;letter-spacing:.01em;line-height:1.4;color:rgba(245,231,193,.78);margin-top:.35em}
+.names .parent{display:block;font-size:clamp(calc(.88rem + 2px),calc(3.4vw + 2px),calc(1.06rem + 2px));font-style:italic;font-weight:500;letter-spacing:.01em;line-height:1.4;color:rgba(245,231,193,.78);margin-top:.35em}
 .names .amp{display:block;font-style:italic;font-weight:400;font-size:.86em;line-height:1.15;color:var(--gold-2);margin:.18em 0 .08em}
 .amp-g{display:inline-block;animation:ampGlow 4.5s ease-in-out infinite}
 @keyframes ampGlow{0%,100%{text-shadow:0 0 0 rgba(240,205,130,0)}50%{text-shadow:0 0 20px rgba(240,205,130,.95)}}
 .hero .ornament{color:var(--gold);margin:20px auto 14px;width:min(200px,62%)}
 .hero-date{font-family:var(--caps);font-size:clamp(.82rem,3.4vw,1.02rem);letter-spacing:.26em;color:var(--gold-3);text-transform:uppercase}
-.hero-hijri{font-style:italic;color:var(--gold-2);margin-top:4px;font-size:1.02rem}
-.hero-city{font-family:var(--caps);font-size:.66rem;letter-spacing:.44em;text-transform:uppercase;color:var(--gold-2);margin-top:14px}
+.hero-city{font-family:var(--caps);font-size:calc(.66rem + 2px);letter-spacing:.44em;text-transform:uppercase;color:var(--gold-2);margin-top:14px}
 .scroll-cue{position:absolute;bottom:calc(14px + env(safe-area-inset-bottom,0px));left:50%;transform:translateX(-50%);z-index:7;display:flex;flex-direction:column;align-items:center;gap:4px;font-family:var(--caps);font-size:.62rem;letter-spacing:.32em;text-transform:uppercase;color:var(--gold-2);text-decoration:none;padding:6px 10px}
-.scroll-cue svg{animation:bob 2s ease-in-out infinite}
-@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(5px)}}
+.scroll-cue{color:var(--gold-3)}
+.scroll-cue .cue-txt{animation:cueGlow 2.4s ease-in-out infinite}
+.scroll-cue svg{overflow:visible;animation:bob 1.8s ease-in-out infinite}
+.scroll-cue svg path{animation:cueChev 1.8s ease-in-out infinite}
+.scroll-cue svg path+path{animation-delay:.25s}
+@keyframes cueGlow{0%,100%{opacity:.75;text-shadow:0 0 0 rgba(245,214,140,0)}50%{opacity:1;text-shadow:0 0 10px rgba(245,214,140,.85),0 0 22px rgba(245,214,140,.35)}}
+@keyframes cueChev{0%,100%{opacity:.3}50%{opacity:1}}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(6px)}}
 .js .rise{opacity:0;transform:translateY(18px)}
 .js.revealed .rise{animation:rise 1.3s var(--ease) forwards;animation-delay:calc(1s + var(--i,0) * .15s)}
 @keyframes rise{to{opacity:1;transform:none}}
@@ -298,7 +303,6 @@ html:not(.js) #intro{display:none}
 .ev-tag{font-family:var(--caps);font-size:.64rem;letter-spacing:.3em;text-transform:uppercase;color:var(--gold-deep);padding:6px 14px 5px;border:1px solid var(--line);border-radius:99px;background:rgba(198,161,91,.08)}
 .ev-title{font-size:2.05rem;color:var(--em-800);margin:14px 0 6px;line-height:1.1}
 .ev-date{font-family:var(--caps);letter-spacing:.06em;font-size:.98rem;color:var(--ink)}
-.ev-hijri{font-style:italic;color:var(--gold-deep);font-size:1rem}
 .ev-time{color:var(--ink-2);font-size:1.05rem;margin-top:2px}
 .ev-rule{display:block;width:64px;height:1px;background:var(--line);margin:18px auto}
 .ev-venue{font-weight:600;font-size:1.4rem;color:var(--em-800);line-height:1.2;max-width:16em}
@@ -319,7 +323,6 @@ html:not(.js) #intro{display:none}
   .when-day{font-family:var(--script);font-size:2.7rem;line-height:1.1;color:var(--gold)}
   .when-num{font-size:7rem;line-height:.9;font-weight:500;color:var(--em-800);font-variant-numeric:lining-nums}
   .when-month{font-family:var(--caps);font-size:.8rem;letter-spacing:.3em;text-transform:uppercase;color:var(--ink-2);margin-top:10px}
-  .when-hijri{font-style:italic;color:var(--gold-deep);margin-top:4px}
 }
 
 .btn{position:relative;overflow:hidden;display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:50px;padding:12px 22px;border-radius:999px;font-family:var(--caps);font-size:.76rem;letter-spacing:.2em;text-transform:uppercase;text-decoration:none;cursor:pointer;border:1px solid transparent;transition:transform .2s var(--ease),box-shadow .2s,background-color .2s,color .2s;user-select:none;-webkit-user-select:none}
@@ -382,7 +385,7 @@ textarea.input:focus{box-shadow:0 0 0 1px var(--em-700)}
 .closing{padding-bottom:calc(46px + env(safe-area-inset-bottom,0px))}
 .closing-msg{max-width:30em;margin:14px auto 0;font-size:1.22rem;color:rgba(245,231,193,.94)}
 .compl{margin-top:34px}
-.compl ul{list-style:none;padding:0;margin:10px 0 0;color:rgba(245,231,193,.86);font-style:italic;font-size:1.1rem;line-height:1.7}
+.compl ul{list-style:none;padding:0;margin:12px 0 0;color:rgba(245,231,193,.9);font-style:italic;font-size:1.35rem;line-height:1.6}
 .hashtag{font-family:var(--caps);letter-spacing:.2em;color:var(--gold-2);margin-top:34px}
 .closing .btn{margin-top:22px}
 .footer-mini{margin-top:50px;font-family:var(--caps);font-size:.62rem;letter-spacing:.32em;text-transform:uppercase;color:rgba(245,231,193,.5)}
@@ -488,13 +491,12 @@ textarea.input:focus{box-shadow:0 0 0 1px var(--em-700)}
     </h1>
     <div class="ornament rise" style="--i:4"></div>
     <p class="hero-date rise" style="--i:5" id="heroDate"></p>
-    <p class="hero-hijri rise" style="--i:5" id="heroHijri"></p>
     <p class="hero-city rise" style="--i:6" data-t="city"></p>
   </div>
 
   <canvas class="fx fx-front" id="fxFront" aria-hidden="true"></canvas>
-  <a class="scroll-cue" href="#invite">Scroll
-    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+  <a class="scroll-cue" href="#invite"><span class="cue-txt">Scroll</span>
+    <svg width="20" height="22" viewBox="0 0 24 26" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 5l6 6 6-6"/><path d="M6 13l6 6 6-6"/></svg>
   </a>
 </header>
 
@@ -559,12 +561,6 @@ textarea.input:focus{box-shadow:0 0 0 1px var(--em-700)}
       <p class="dua-tr reveal">Rabbanā hab lanā min azwājinā wa dhurriyyātinā qurrata aʿyunin wajʿalnā lil-muttaqīna imāmā</p>
       <p class="dua-en reveal">“Our Lord, grant us joy and comfort in our spouses and our children, and make us leaders of the God-conscious.”</p>
       <p class="cite reveal">Surah Al-Furqan · 25:74</p>
-
-      <div class="ornament reveal"></div>
-
-      <p class="dua-ar reveal" lang="ar">وَمِنْ آيَاتِهِ أَنْ خَلَقَ لَكُم مِّنْ أَنفُسِكُمْ أَزْوَاجًا لِّتَسْكُنُوا إِلَيْهَا وَجَعَلَ بَيْنَكُم مَّوَدَّةً وَرَحْمَةً</p>
-      <p class="dua-en reveal">“And among His signs is that He created for you spouses from among yourselves, that you may find tranquillity in them; and He placed between you affection and mercy.”</p>
-      <p class="cite reveal">Surah Ar-Rum · 30:21</p>
     </div>
   </section>
 
@@ -719,7 +715,7 @@ const WEDDING = {
   ],
 
   rsvp: {
-    deadline: "1 March 2027",
+    deadline: "1 February 2027",
     whatsapp: "+1 (469) 971-0307",   // RSVPs go to this WhatsApp number (include the country code)
   },
 
@@ -772,28 +768,6 @@ const WEDDING = {
     if (e <= s) e = new Date(e.getTime() + 864e5);
     return e;
   };
-  /* Hijri dates. Some phones have the Islamic calendar but not its English month names, and fall back to
-     Gregorian names (Shawwal is month 10, so it showed as "October"). So ask for numbers only and name the
-     month here. Phones with no Islamic calendar at all hide the Hijri line rather than risk a wrong date. */
-  const HIJRI_MONTHS = ["Muharram", "Safar", "Rabi al-Awwal", "Rabi al-Thani", "Jumada al-Ula", "Jumada al-Akhirah", "Rajab", "Shaban", "Ramadan", "Shawwal", "Dhul Qadah", "Dhul Hijjah"];
-  let hijriFmt = null;
-  try {
-    const f = new Intl.DateTimeFormat("en-u-ca-islamic-umalqura-nu-latn", { timeZone: "UTC", day: "numeric", month: "numeric", year: "numeric" });
-    if (f.resolvedOptions().calendar.startsWith("islamic")) hijriFmt = f;
-  } catch (e) { /* no Intl Islamic calendar: the Hijri line stays hidden */ }
-  const hijriParts = s => {
-    if (!hijriFmt) return null;
-    const parts = hijriFmt.formatToParts(noonUTC(s));
-    const g = t => parseInt((parts.find(p => p.type === t) || {}).value, 10);
-    const d = g("day"), m = g("month"), y = g("year");
-    if (!(m >= 1 && m <= 12 && d >= 1 && d <= 30 && y > 1400 && y < 1600)) return null; // not a real Hijri date: hide it
-    return { d: String(d), m: HIJRI_MONTHS[m - 1], y: String(y) };
-  };
-  const hijriOf = ev => {
-    if (ev.hijri) return ev.hijri;
-    const h = hijriParts(ev.date);
-    return h ? `${h.d} ${h.m} ${h.y} AH` : "";
-  };
   const sorted = W.events.map(e => e.date).sort();
   const first = sorted[0], last = sorted[sorted.length - 1];
   const dayIndex = s => Math.round((noonUTC(s) - noonUTC(first)) / 864e5);
@@ -805,10 +779,6 @@ const WEDDING = {
     return `${fmt(a, { day: "numeric", month: "short", year: "numeric" })} – ${fmt(b, { day: "numeric", month: "short", year: "numeric" })}`;
   };
   $("#heroDate").textContent = rangeText(first, last);
-  const h1 = hijriParts(first), h2 = hijriParts(last);
-  $("#heroHijri").textContent = !h1 ? "" : (h1.m === h2.m && h1.y === h2.y)
-    ? (first === last ? `${h1.d} ${h1.m} ${h1.y} AH` : `${h1.d} – ${h2.d} ${h1.m} ${h1.y} AH`)
-    : `${h1.d} ${h1.m} – ${h2.d} ${h2.m} ${h2.y} AH`;
   const mainEv = W.events.find(e => e.main) || W.events[0];
   const countWords = ["", "One", "Two", "Three", "Four", "Five", "Six"];
   $("#eventsSub").textContent = `${countWords[W.events.length] || W.events.length} celebrations in ${W.city}, in shaa Allah`;
@@ -884,7 +854,7 @@ const WEDDING = {
     /* Each line of hero text as a box (hero coordinates, without the rise/parallax transforms), padded. */
     function textBoxes() {
       const hr = hero.getBoundingClientRect(), out = [];
-      $$(".kicker, .names .n, .names .parent, .names .amp, .hero-date, .hero-hijri, .hero-city", hero).forEach(el => {
+      $$(".kicker, .names .n, .names .parent, .names .amp, .hero-date, .hero-city", hero).forEach(el => {
         let ox = 0, oy = 0, e = el;
         while (e && e !== hero) { ox += e.offsetLeft; oy += e.offsetTop; e = e.offsetParent; }
         if (e !== hero) return;
@@ -1134,21 +1104,18 @@ const WEDDING = {
 
   const journey = $("#journey");
   journey.innerHTML = `<div class="j-track" aria-hidden="true"><div class="j-fill"></div></div>` + W.events.map((ev, i) => {
-    const hj = hijriOf(ev);
     return `<div class="stop${i % 2 ? " alt" : ""}">
       <span class="j-node" aria-hidden="true"></span>
       <div class="when reveal" aria-hidden="true">
         <span class="when-day">${esc(fmt(ev.date, { weekday: "long" }))}</span>
         <span class="when-num">${esc(fmt(ev.date, { day: "numeric" }))}</span>
         <span class="when-month">${esc(fmt(ev.date, { month: "long", year: "numeric" }))}</span>
-        ${hj ? `<span class="when-hijri">${esc(hj)}</span>` : ""}
       </div>
       <article class="ev reveal">
         <div class="ev-icon" aria-hidden="true">${ICONS[ev.icon] || ICONS.rings}</div>
         <span class="ev-tag">Day ${esc(countWords[dayIndex(ev.date) + 1] || dayIndex(ev.date) + 1)}</span>
         <h3 class="ev-title">${esc(ev.title)}</h3>
         <p class="ev-date">${esc(longDate(ev.date))}</p>
-        ${hj ? `<p class="ev-hijri">${esc(hj)}</p>` : ""}
         <p class="ev-time">${esc(ev.timeText)}</p>
         <span class="ev-rule" aria-hidden="true"></span>
         <p class="ev-venue">${esc(ev.venue)}</p>
