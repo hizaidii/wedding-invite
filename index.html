@@ -250,7 +250,7 @@ html:not(.js) #intro{display:none}
 .parentage{font-style:italic;color:var(--ink-2);font-size:1.06rem;margin-top:6px}
 .note{margin:28px auto 0;max-width:28em;font-style:italic;color:var(--ink-2)}
 .invite-card .ornament{margin:30px auto 0;width:min(180px,60%)}
-.blessings-title{font-style:italic;color:var(--gold-deep);font-size:1.12rem;margin:0}
+.blessings-title{font-style:italic;color:var(--gold-deep);font-size:1.12rem;margin:0;text-wrap:balance}
 .blessings-names{list-style:none;padding:0;margin:8px 0 0;color:var(--em-800);font-weight:700;font-size:clamp(1.06rem,4.2vw,1.2rem);line-height:1.5}
 .blessings-names li{text-wrap:balance}
 .blessings-names li+li{margin-top:4px}
@@ -516,7 +516,7 @@ textarea.input:focus{box-shadow:0 0 0 1px var(--em-700)}
         <svg class="corner bl" viewBox="0 0 46 46" aria-hidden="true"><use href="#cornerArt"/></svg>
         <svg class="corner br" viewBox="0 0 46 46" aria-hidden="true"><use href="#cornerArt"/></svg>
         <div class="blessings" id="blessings">
-          <p class="blessings-title">With the love and blessings of grandparents</p>
+          <p class="blessings-title">With the love and blessings of the grandparents</p>
           <ul class="blessings-names" id="grandparents"></ul>
           <div class="card-divider" aria-hidden="true"><i></i><svg viewBox="-14 -6 28 12"><path d="M-12 0L-8.5-2.2L-5 0L-8.5 2.2ZM5 0L8.5-2.2L12 0L8.5 2.2Z" fill="currentColor" opacity=".55"/><path d="M0-5L1.4-1.4L5 0L1.4 1.4L0 5L-1.4 1.4L-5 0L-1.4-1.4Z" fill="currentColor"/></svg><i></i></div>
         </div>
@@ -662,7 +662,7 @@ const WEDDING = {
     parents: "Dr. Mir Jafar Hussain & Mrs. Sabika Hussain",
     // Shown at the top of the invite card. Set to [] to hide.
     grandparents: [
-      "Late Mir Murtuza Hussain Tabrezi and Siddiqua Begum",
+      "Late Mir Murtuza Hussain Tabrezi and Siddiqa Begum",
       "Mir Aulad Hussain and Amatul Azra",
     ],
   },
@@ -670,7 +670,7 @@ const WEDDING = {
     name: "Sughra Fatima",
     short: "Sughra",
     relation: "Daughter of",
-    parents: "Mirza Jarrar Ali & Mrs. Anjum Fatima",
+    parents: "Mr. Mirza Jarar Ali & Mrs. Anjum Fatima",
   },
   city: "Dubai",
   utcOffset: "+04:00",            // venue time zone offset (UAE = +04:00)
