@@ -237,7 +237,8 @@ html:not(.js) #intro{display:none}
 .invite-card .hosts{font-weight:700}
 .lead{margin:14px auto 0;max-width:31em;color:var(--ink-2)}
 .couple{font-weight:600;font-size:clamp(2rem,7.4vw,2.7rem);color:var(--em-800);margin-top:20px;line-height:1.1;letter-spacing:.01em}
-.with{font-family:var(--script);font-size:2.1rem;color:var(--gold);line-height:1.3;margin:6px 0 0}
+.with{font-family:var(--script);font-size:2.1rem;color:var(--gold);line-height:1.3;margin:11px 0 0}
+.with+.couple{margin-top:4px} /* with the margin above, leaves equal visible space above and below "with" */
 .parentage{font-style:italic;color:var(--ink-2);font-size:1.06rem;margin-top:6px}
 .note{margin:28px auto 0;max-width:28em;font-style:italic;color:var(--ink-2)}
 .invite-card .ornament{margin:30px auto 0;width:min(180px,60%)}
@@ -264,6 +265,7 @@ html:not(.js) #intro{display:none}
 @keyframes tick{from{transform:translateY(-40%);opacity:0}to{transform:none;opacity:1}}
 .cd-lbl{display:block;font-family:var(--caps);font-size:.6rem;letter-spacing:.24em;text-transform:uppercase;color:var(--gold-2);margin-top:10px}
 .cd-note{font-style:italic;color:rgba(245,231,193,.85)}
+.cd-grid[hidden]{display:none}
 .cd-done{font-size:1.25rem;font-style:italic;margin-top:18px;color:var(--gold-3)}
 
 /* ───────────── The wedding journey ───────────── */
@@ -535,7 +537,7 @@ textarea.input:focus{box-shadow:0 0 0 1px var(--em-700)}
       <div class="cd-unit"><span class="cd-num" id="cdS">00</span><span class="cd-lbl">Seconds</span></div>
     </div>
     <p class="cd-note reveal" id="cdNote"></p>
-    <p class="cd-done" id="cdDone" hidden>The Nikah has taken place. Thank you for your duas for the couple.</p>
+    <p class="cd-done" id="cdDone" hidden>Thank you for celebrating with us and for your duas for the couple.</p>
   </section>
 
   <!-- ═════════════ THE WEDDING JOURNEY ═════════════ -->
@@ -614,8 +616,8 @@ textarea.input:focus{box-shadow:0 0 0 1px var(--em-700)}
 
   <!-- ═════════════ CLOSING ═════════════ -->
   <footer class="band closing" id="closing">
-    <p class="script-lg reveal">We look forward to your presence</p>
-    <p class="closing-msg reveal">Your presence and duas are the most precious gift we could ask for. We look forward to celebrating with you.</p>
+    <p class="script-lg reveal">Join us in celebrating their union</p>
+    <p class="closing-msg reveal">Your presence and duas are the most precious gifts we could ask for as they begin this new chapter together.</p>
     <div class="compl reveal" id="complBlock">
       <p class="eyebrow">With best compliments from</p>
       <ul id="complList"></ul>
@@ -661,7 +663,7 @@ const WEDDING = {
     parents: "Dr. Mir Jafar Hussain & Mrs. Sabika Hussain",
     // Shown at the top of the invite card. Set to [] to hide.
     grandparents: [
-      "Late Mir Murtuza Hussain Tabrezi and Siddiqa Begum",
+      "Late Mir Murtuza Hussain Tabrezi and Siddiqua Begum",
       "Mir Aulad Hussain and Amatul Azra",
     ],
   },
@@ -681,6 +683,7 @@ const WEDDING = {
       id: "mehendi",
       label: "Mehendi",
       title: "Mehendi",
+      countdownTitle: "The celebration begins in",   // countdown heading while counting to this event
       date: "2027-03-12", start: "20:00", end: "23:30",
       timeText: "8:00 PM onwards",
       venue: "Radisson Blu Hotel, Dubai Deira Creek",
@@ -697,13 +700,15 @@ const WEDDING = {
       venue: "Le Méridien Dubai Hotel & Conference Centre",
       address: "Airport Road, Al Garhoud, Dubai",
       icon: "rings",
-      countdown: true,              // the countdown counts to this event
+      countdownTitle: "Nikah celebration begins in",
+      main: true,                   // the main day: its date is shown in the footer
       mapUrl: "https://www.google.com/maps/search/?api=1&query=Le%20M%C3%A9ridien%20Dubai%20Hotel%20%26%20Conference%20Centre",
     },
     {
       id: "valima",
       label: "Valima",
       title: "Valima",
+      countdownTitle: "Valima celebration begins in",
       date: "2027-03-14", start: "20:00", end: "23:30",
       timeText: "8:00 PM onwards",
       venue: "Majma Ahlul Bait",
@@ -804,7 +809,7 @@ const WEDDING = {
   $("#heroHijri").textContent = !h1 ? "" : (h1.m === h2.m && h1.y === h2.y)
     ? (first === last ? `${h1.d} ${h1.m} ${h1.y} AH` : `${h1.d} – ${h2.d} ${h1.m} ${h1.y} AH`)
     : `${h1.d} ${h1.m} – ${h2.d} ${h2.m} ${h2.y} AH`;
-  const mainEv = W.events.find(e => e.countdown) || W.events[0];
+  const mainEv = W.events.find(e => e.main) || W.events[0];
   const countWords = ["", "One", "Two", "Three", "Four", "Five", "Six"];
   $("#eventsSub").textContent = `${countWords[W.events.length] || W.events.length} celebrations in ${W.city}, in shaa Allah`;
   $("#footerMini").textContent = `${W.groom.short} & ${W.bride.short} · ${mainEv.date.split("-").reverse().join(".")}`;
@@ -1205,20 +1210,32 @@ const WEDDING = {
     if (document.fonts && document.fonts.ready) document.fonts.ready.then(layout);
   })();
 
-  /* ---------- countdown ---------- */
-  const target = startOf(mainEv);
-  $("#cdNote").textContent = `until the ${mainEv.title} · ${longDate(mainEv.date)}`;
+  /* ---------- countdown ----------
+     Counts down to each event in turn. Once an event starts it shows "has begun" for 2 hours, then moves on to
+     the next event. After the last one it says Alhamdulillah. */
+  const MOVE_ON_AFTER = 2 * 36e5;
+  const byStart = W.events.slice().sort((a, b) => startOf(a) - startOf(b));
   const pad = n => String(n).padStart(2, "0");
   const setNum = (el, v) => { v = String(v); if (el.textContent === v) return; el.textContent = v; if (reduceMotion) return; el.classList.remove("tick"); void el.offsetWidth; el.classList.add("tick"); };
-  let timer = null;
+  let timer = null, shown = "";
   const tick = () => {
-    let ms = target - Date.now();
-    if (ms <= 0) {
+    const now = Date.now();
+    const ev = byStart.find(e => now < startOf(e).getTime() + MOVE_ON_AFTER);
+    if (!ev) {
       $("#cdGrid").hidden = true; $("#cdNote").hidden = true; $("#cdDone").hidden = false;
       $("#cdScript").textContent = "Alhamdulillah";
       if (timer) clearInterval(timer);
       return;
     }
+    let ms = startOf(ev) - now;
+    const live = ms <= 0, state = ev.id + (live ? ":live" : "");
+    if (state !== shown) {
+      shown = state;
+      $("#cdScript").textContent = live ? `The ${ev.title} has begun` : (ev.countdownTitle || `The ${ev.title} begins in`);
+      $("#cdNote").textContent = live ? `${ev.venue} · ${ev.timeText}` : `until the ${ev.title} · ${longDate(ev.date)}`;
+      $("#cdGrid").hidden = live;
+    }
+    if (live) return;
     const d = Math.floor(ms / 864e5); ms -= d * 864e5;
     const h = Math.floor(ms / 36e5); ms -= h * 36e5;
     const m = Math.floor(ms / 6e4); ms -= m * 6e4;
