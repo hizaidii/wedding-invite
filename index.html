@@ -227,6 +227,8 @@ html:not(.js) #intro{display:none}
 .wrap{max-width:720px;margin:0 auto}
 .wide{max-width:1140px;margin:0 auto}
 .eyebrow{font-family:var(--caps);font-size:.72rem;letter-spacing:.32em;text-transform:uppercase;color:var(--gold-deep);margin-bottom:12px}
+/* ordinal suffix (1st, 2nd...) kept lowercase and raised, so it doesn't read as "1ST" in the all-caps lines */
+.ord{text-transform:none;font-size:.78em;vertical-align:.42em;letter-spacing:.06em;margin-left:.08em}
 .title{font-size:clamp(2.3rem,7.5vw,3.4rem);line-height:1.08;color:var(--em-800);font-weight:500}
 .sub{font-style:italic;color:var(--ink-2);margin-top:8px}
 .ornament{color:var(--gold);width:min(240px,70%);margin:24px auto}
@@ -718,7 +720,7 @@ const WEDDING = {
   ],
 
   rsvp: {
-    deadline: "1 February 2027",
+    deadline: "1st February 2027",
     whatsapp: "+1 (469) 971-0307",   // RSVPs go to this WhatsApp number (include the country code)
   },
 
@@ -754,6 +756,7 @@ const WEDDING = {
   /* ---------- text binds ---------- */
   $$("[data-t]").forEach(el => { const v = pick(el.dataset.t); if (v != null) el.textContent = v; });
   $$('[data-t$="parents"]').forEach(el => { el.innerHTML = esc(el.textContent).split(" &amp; ").map(s => `<span class="nw">${s}</span>`).join(" &amp; "); });
+  $$('[data-t="rsvp.deadline"]').forEach(el => { el.innerHTML = esc(el.textContent).replace(/\b(\d+)(st|nd|rd|th)\b/, '$1<span class="ord">$2</span>'); });
   const initialA = (W.groom.short || "A")[0], initialB = (W.bride.short || "B")[0];
   $$(".mono-a").forEach(el => el.textContent = initialA);
   $$(".mono-b").forEach(el => el.textContent = initialB);
